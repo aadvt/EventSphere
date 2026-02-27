@@ -1,20 +1,20 @@
-version: '3.8'
-
 services:
   backend:
     build: ./backend
     restart: always
-    env_file: ./backend/.env
+    env_file:
+      - ./backend/.env
     expose:
       - "8000"
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      args:
+        NEXT_PUBLIC_API_URL: http://localhost
     restart: always
     expose:
       - "3000"
-    environment:
-      - NEXT_PUBLIC_API_URL=http://your-ec2-ip/api
 
   nginx:
     image: nginx:alpine

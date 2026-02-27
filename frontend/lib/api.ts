@@ -14,7 +14,7 @@ export interface Event {
 
 export async function getEvents(search?: string) {
     const url = new URL(`${API_URL}/api/events/`);
-    if (search) url.searchParams.append('q', search);
+    if (search) url.searchParams.append('search', search);
     const res = await fetch(url.toString(), { cache: 'no-store' });
     if (!res.ok) throw new Error('Failed to fetch events');
     return res.json();

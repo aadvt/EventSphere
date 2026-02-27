@@ -4,21 +4,26 @@ from app.database import supabase
 from app.schemas.event import EventCreate, EventUpdate
 
 def get_events(page: int, size: int, search: str | None = None) -> Tuple[List[Dict[str, Any]], int]:
-    offset = (page - 1) * size
-    
-    query = supabase.table("events").select("*, users(full_name)", count="exact")
-    
-    if search:
-        query = query.ilike("title", f"%{search}%")
+    try:
+        offset = (page - 1) * size
         
-    query = query.eq("is_active", True)
-    query = query.order("event_date").range(offset, offset + size - 1)
-    
-    response = query.execute()
-    
-    events = response.data if response.data else []
-    total_count = response.count if response.count is not None else 0
-    return events, total_count
+        query = supabase.table("events").select("*, users(full_name)", count="exact")
+        
+        if search:
+            query = query.ilike("title", f"%{search}%")
+            
+        query = query.eq("is_active", True)
+        query = query.order("event_date").range(offset, offset + size - 1)
+        
+        response = query.execute()
+        
+        events = response.data if response.data else []
+        total_count = response.count if response.count is not None else 0
+        return events, total_count
+    except Exception as e:
+        import logging
+        logging.error(f"Supabase error fetching events: {e}")
+        return [], 0
 
 def get_event_by_id(event_id: uuid.UUID) -> Dict[str, Any] | None:
     try:
