@@ -1,64 +1,64 @@
 'use client';
-import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import Link from 'next/link';
 
 export default function HeroSection() {
-    const [time, setTime] = useState<string>('Loading...');
-
-    useEffect(() => {
-        const updateClock = () => {
-            const now = new Date();
-            const options: Intl.DateTimeFormatOptions = { hour: '2-digit', minute: '2-digit', weekday: 'long' };
-            setTime(now.toLocaleTimeString('en-US', options));
-        };
-        updateClock();
-        const interval = setInterval(updateClock, 60000);
-        return () => clearInterval(interval);
-    }, []);
-
     return (
-        <section className="w-full h-screen grid grid-cols-1 md:grid-cols-2 overflow-hidden bg-[#0d1f2d]">
-            <div className="flex flex-col justify-center px-10 md:px-20 relative z-10 h-full">
-                <motion.div
-                    initial={{ opacity: 0, x: -50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                    className="mb-8"
-                >
-                    <p className="text-xl text-slate-300 font-medium mb-2">What&apos;s Happening at</p>
-                    <h2 className="text-6xl md:text-7xl font-black text-white leading-[1.1] mb-6 tracking-tighter drop-shadow-lg">Sahyadri<br />College</h2>
-                    <div className="flex items-center gap-2 text-slate-300 font-medium mb-12 bg-black/20 w-fit px-4 py-2 rounded-full border border-white/10">
-                        <span className="material-symbols-outlined text-sm">schedule</span>
-                        <span>{time}</span>
-                    </div>
-                    <div className="flex flex-col sm:flex-row items-center gap-3 w-full max-w-md bg-white/5 p-1.5 rounded-3xl sm:rounded-full border border-white/10 shadow-lg">
-                        <Input
-                            className="bg-transparent border-none outline-none focus-visible:ring-0 text-white placeholder:text-slate-400 px-6 flex-1 text-base h-12 w-full"
-                            placeholder="Enter your email"
-                            type="email"
-                        />
-                        <Button className="bg-white text-black font-bold h-12 px-8 rounded-full hover:bg-slate-200 transition-all text-sm w-full sm:w-auto">
-                            Subscribe
-                        </Button>
-                    </div>
-                </motion.div>
-            </div>
+        <section className="w-full min-h-[85vh] flex items-center overflow-hidden bg-[#1a1a1a] relative">
+            {/* Subtle background grain */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(120,60,200,0.08),transparent_60%)]"></div>
 
-            <div className="relative h-full w-full hidden md:block">
+            <div className="max-w-[1440px] mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-8 px-10 md:px-20 items-center relative z-10">
+                {/* Left: Text Content */}
                 <motion.div
-                    initial={{ opacity: 0, scale: 1.05 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 1.5, ease: 'easeOut' }}
-                    className="absolute inset-0 w-full h-full"
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, ease: 'easeOut' }}
+                    className="py-16"
                 >
-                    <img
-                        alt="Sahyadri Campus"
-                        className="w-full h-full object-cover"
-                        src="/sahy.jpg"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#0d1f2d] via-[#0d1f2d]/50 to-transparent"></div>
+                    <p className="text-sm font-semibold text-slate-400 tracking-widest uppercase mb-6">
+                        EventSphere
+                    </p>
+
+                    <h1 className="text-5xl md:text-[4.2rem] font-black text-white leading-[1.08] tracking-tight mb-3">
+                        Campus events
+                    </h1>
+                    <h1 className="text-5xl md:text-[4.2rem] font-black leading-[1.08] tracking-tight mb-8">
+                        <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent">
+                            start here.
+                        </span>
+                    </h1>
+
+                    <p className="text-lg text-slate-400 leading-relaxed max-w-md mb-10">
+                        Discover workshops, hackathons, and seminars at Sahyadri College. Register in seconds and never miss what&apos;s happening on campus.
+                    </p>
+
+                    <Link
+                        href="#events"
+                        className="inline-flex items-center gap-2 border border-white/20 text-white font-semibold px-8 py-4 rounded-full hover:bg-white hover:text-black transition-all duration-300 text-sm tracking-wide"
+                    >
+                        Explore Events
+                        <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                    </Link>
+                </motion.div>
+
+                {/* Right: 3D Hero Art */}
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1.2, ease: 'easeOut', delay: 0.3 }}
+                    className="relative flex items-center justify-center hidden md:flex"
+                >
+                    {/* Dark circle background */}
+                    <div className="relative w-[480px] h-[480px]">
+                        <div className="absolute inset-0 rounded-full bg-[#111111] shadow-2xl shadow-purple-900/10"></div>
+                        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-900/20 via-transparent to-pink-900/10"></div>
+                        <img
+                            alt="Sahyadri College 3D Art"
+                            className="relative z-10 w-full h-full object-contain p-4 drop-shadow-2xl"
+                            src="/sahy.png"
+                        />
+                    </div>
                 </motion.div>
             </div>
         </section>

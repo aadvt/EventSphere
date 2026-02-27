@@ -15,9 +15,9 @@ export default function Sidebar() {
                 <div className="bg-[#1a1a1a] rounded-3xl p-8 border border-white/5 shadow-2xl">
                     <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center p-2 mb-6">
                         <img
-                            alt="Logo"
+                            alt="Sahyadri Logo"
                             className="w-full h-full object-contain"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9lI5F-07hJut_3nTC8P8A3P_Wh_-tv3g1_BW05SQ6NGE-NifixTAeZWoMyIju3Ozfxbeo4YYEKAzlf-pN7XW3ktzf8Hn3qOOH077GKD6kxVuDX7horzxifYT-uYu-ppcdmq1kWY0R5Bym3hTt3nqGUzQyuUxXDBMT7A04a_zkeMoAX1sIY3dVlq-S_Uy471UZkbcDlLHriOYgKKHsuD5e0IrHB2qyqBJoZ_G7TUGXy6KZ-VP2Rgc45MGcCbN99iKwk40QQFXtcja6"
+                            src="/sahyadri-logo.jpg"
                         />
                     </div>
                     <h5 className="text-xl font-bold text-white mb-4">Sahyadri College</h5>
