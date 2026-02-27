@@ -1,0 +1,43 @@
+# ========================
+# Node / Next.js (frontend)
+# ========================
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/.env.local
+frontend/.env*.local
+frontend/tsconfig.tsbuildinfo
+frontend/*.log
+
+# ========================
+# Python / FastAPI (backend)
+# ========================
+backend/venv/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/.env
+backend/*.pyc
+backend/*.pyo
+
+# ========================
+# IDE / Editor
+# ========================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ========================
+# OS
+# ========================
+.DS_Store
+desktop.ini
+
+# ========================
+# Build / Debug artifacts
+# ========================
+*.log
+*.txt.bak
