@@ -1,5 +1,9 @@
 // lib/api.ts
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+// Set the base URL dynamically based on environment (Server vs Client)
+const IS_SERVER = typeof window === 'undefined';
+const API_URL = IS_SERVER
+    ? (process.env.API_URL || process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000')
+    : (process.env.NEXT_PUBLIC_API_URL || '');
 
 export interface Event {
     id: string | number;
