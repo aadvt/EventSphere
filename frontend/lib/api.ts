@@ -1,9 +1,10 @@
 // lib/api.ts
-// Set the base URL dynamically based on environment (Server vs Client)
+// Server-side: use Docker internal hostname (backend:8000) or fallback
+// Client-side: always use empty string so browser fetches relative to current origin
 const IS_SERVER = typeof window === 'undefined';
 const API_URL = IS_SERVER
-    ? (process.env.API_URL || process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000')
-    : (process.env.NEXT_PUBLIC_API_URL || '');
+    ? (process.env.API_URL || 'http://127.0.0.1:8000')
+    : '';
 
 export interface Event {
     id: string | number;
@@ -17,9 +18,9 @@ export interface Event {
 }
 
 export async function getEvents(search?: string) {
-    const url = new URL(`${API_URL}/api/events/`);
-    if (search) url.searchParams.append('search', search);
-    const res = await fetch(url.toString(), { cache: 'no-store' });
+    let urlStr = `${API_URL}/api/events/`;
+    if (search) urlStr += `?search=${encodeURIComponent(search)}`;
+    const res = await fetch(urlStr, { cache: 'no-store' });
     if (!res.ok) throw new Error('Failed to fetch events');
     return res.json();
 }
